@@ -1,0 +1,6 @@
+[submodule "42-minilibx"]
+	path = .minilibx
+	url = https://github.com/vwade/42-minilibx.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/vwade/42-libft.git
