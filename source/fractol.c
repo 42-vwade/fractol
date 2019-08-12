@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:18:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/12 09:18:01 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/12 09:27:54 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,7 @@ void
 	o.m_init = mlx_init();
 	o.m_title = WINDOW_TITLE;
 	o.m_window = mlx_new_window(o.m_init, o.dim.x, o.dim.y, o.m_title);
+	o.m_image = mlx_new_image(o.m_init, o.dim.x, o.dim.y);
+	o.m_start = mlx_get_data_addr(o.m_image, &(int){BIT_DEPTH},
+		&o.bmp.line, &o.bmp.endian);
 }
