@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:30:09 by viwade            #+#    #+#             */
-/*   Updated: 2019/07/29 05:03:37 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/12 09:16:08 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/types.h>
 # include "fractol_macros.h"
 
-struct	s_pixel
+struct	s_rgb
 {
 	unsigned int	b:BIT_DEPTH;
 	unsigned int	g:BIT_DEPTH;
@@ -25,8 +25,8 @@ struct	s_pixel
 
 union	u_pixel
 {
-	unsigned int	col;
-	struct s_pixel	rgb;
+	unsigned int	i;
+	struct s_rgb	c;
 };
 
 struct	s_vec2d
@@ -42,13 +42,21 @@ struct	s_vec3d
 	double	z;
 };
 
+struct	s_config
+{
+	long	p_threads;
+};
+
 struct	s_fractol
 {
+	cfg_t	config;
 	void	*m_init;
 	void	*m_window;
+	char	*m_title;
 	void	*m_image;
 	void	*m_start;
 	v3d_t	dim;
+	size_t	bailout;
 };
 
 #endif

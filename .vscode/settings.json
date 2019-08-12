@@ -1,8 +1,5 @@
 {
 	"files.associations": {
-		"fractol.h": "c",
-		"draw.h": "c",
-		"fractol_macros.h": "c",
-		"stdlib.h": "c"
+		"fractol.h": "c"
 	}
 }

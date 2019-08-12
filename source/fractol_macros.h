@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol_macros.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/09 10:15:05 by viwade            #+#    #+#             */
+/*   Updated: 2019/08/12 09:18:27 by viwade           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef _FRACTOL_MACROS_H
 # define _FRACTOL_MACROS_H
 
@@ -17,6 +29,7 @@
 */
 
 # define THREADS_PER_CPU	8
+# define BAILOUT			11
 # define BIT_DEPTH 8
 # define LINE_RESOLUTION	42
 # define WINDOW_PADDING		21
@@ -24,18 +37,23 @@
 # define CONTROL_PANEL_Y	420
 # define VIEW_RES_MIN	(2 * CONTROL_PANEL_X)
 # define VIEW_RES_MAX	(6 * CONTROL_PANEL_X)
+# define DIM_X				VIEW_RES_MAX
+# define DIM_Y				VIEW_RES_MAX
+# define WINDOW_TITLE		"42 Fractol"
 
 /*
 **	TYPE DEFINITION
 */
 
 # define _TD_ENV	typedef struct s_fractol	env_t;
+# define _TD_CFG	typedef struct s_config		config_t;
 # define _TD_CFG	typedef struct s_config		cfg_t;
+# define _TD_GRD	typedef struct s_grid	grid_t;
 # define _TD_MLX	typedef struct s_mlx	mlx_t;
 # define _TD_MAP	typedef struct s_map	map_t;
 # define _TD_MSH	typedef struct s_mesh	mesh_t;
 # define _TD_IMG	typedef struct s_image	img_t;
-# define _TD_PXL	typedef struct s_pixel	pixel_t;
+# define _TD_PXL	typedef struct s_rgb	pixel_t;
 # define _UD_PXL	typedef union u_pixel	pixel_u;
 # define _TD_V4D	typedef struct s_vec4d	v4d_t;
 # define _TD_V3D	typedef struct s_vec3d	v3d_t;
@@ -49,6 +67,7 @@
 
 _TD_ENV;
 _TD_CFG;
+_TD_GRD;
 _TD_MLX;
 _TD_MAP;
 _TD_MSH;
