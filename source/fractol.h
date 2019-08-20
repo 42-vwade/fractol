@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:02:59 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/11 13:50:59 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/12 12:33:24 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include "../.minilibx/mlx.h"
 
 void	fractol(cfg_t configuration);
-void	mandelbrot(env_t *o, size_t limit, v3d_t c);
+void	mandelbrot(env_t *o);
+pixel_u	color_gradient(double n, size_t bailout);
+
 
 #endif

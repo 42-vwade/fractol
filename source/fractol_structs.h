@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:30:09 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/12 10:54:48 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/19 06:41:48 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "fractol_macros.h"
 
 typedef struct s_image	t_img;
+typedef struct s_map	t_map;
+typedef struct s_zoom	t_zoom;
 
 struct	s_rgb
 {
@@ -43,6 +45,20 @@ struct	s_vec3d
 	double	y;
 	double	z;
 };
+
+struct	s_zoom
+{
+	double			x_min;
+	double			x_max;
+	double			y_min;
+	double			y_max;
+};
+
+struct s_map
+{
+	unsigned long	*iter;
+};
+
 
 struct	s_image
 {
@@ -71,7 +87,9 @@ struct	s_fractol
 	void			*m_start;
 	t_img			bmp;
 	v3d_t			dim;
+	t_map			map;
 	const size_t	bailout;
+	t_zoom			zoom;
 };
 
 #endif
