@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:29:42 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/20 00:34:24 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/21 04:31:20 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 static void
 	draw_pixel(env_t *o, size_t index, pixel_u col)
 {
-	int	*screen;
-
-	screen = o->m_start;
-	screen[index] = 0xffffff & col.i;
+	((int *)o->m_start)[index] = 0xffffff & col.i;
 }
 
-static size_t
+static void
 	solve(env_t *o, size_t *bounces, v3d_t c)
 {
 	double	z;
@@ -36,7 +33,6 @@ static size_t
 		c.y += c.y;
 		bounces[0]++;
 	}
-	return (bounces[0]);
 	draw_pixel(o, c.x + (c.y * o->dim.x), color_gradient(*bounces, o->bailout));
 }
 
@@ -56,8 +52,12 @@ void
 	size_t	bounces;
 
 	i = -1;
+	ft_bzero(o->m_start, sizeof(int) * DIM_Y * DIM_X);
 	limit = o->dim.x * o->dim.y;
 	while (++i < limit && !(bounces = 0))
-		o->map.iter[i] = solve(o, &bounces,
+		solve(o, &o->map.iter[i],
 			(v3d_t){(int)(i % (int)o->dim.x), (int)(i / (int)o->dim.x), 0});
+	mlx_put_image_to_window(o->m_init, o->m_window, o->m_image, 0, 0);
+	return ;
+	ft_memcpy(o->map.iter, o->m_start, sizeof(int) * DIM_Y * DIM_X);
 }

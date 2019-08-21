@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:18:22 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/12 10:55:25 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/21 04:19:26 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void
 	env_t	o;
 
 	*((size_t*)&o.bailout) = 10;
+	o.zoom = (t_zoom){-1, 0.5, -1, 1, 1, (v3d_t){0,0,0}};
+	*((t_zoom*)&o.zoom_default) = o.zoom;
 	o.dim = (v3d_t){IS_O(DIM_X), IS_O(DIM_Y), IS_O(DIM_Y) / IS_O(DIM_X)};
 	o.m_init = mlx_init();
 	o.m_title = WINDOW_TITLE;

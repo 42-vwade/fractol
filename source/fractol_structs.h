@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:30:09 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/19 06:41:48 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/21 04:32:34 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ struct	s_vec3d
 
 struct	s_zoom
 {
-	double			x_min;
-	double			x_max;
-	double			y_min;
-	double			y_max;
+	double	x_min;
+	double	x_max;
+	double	y_min;
+	double	y_max;
 };
 
 struct s_map
 {
-	unsigned long	*iter;
+	unsigned int	iter[DIM_Y * DIM_X];
 };
 
 
@@ -89,7 +89,10 @@ struct	s_fractol
 	v3d_t			dim;
 	t_map			map;
 	const size_t	bailout;
+	const t_zoom	zoom_default;
 	t_zoom			zoom;
+	double			scale;
+	v3d_t			center;
 };
 
 #endif
