@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 10:15:05 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/12 09:18:27 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/21 10:47:25 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 */
 
 # define _TD_ENV	typedef struct s_fractol	env_t;
-# define _TD_CFG	typedef struct s_config		config_t;
 # define _TD_CFG	typedef struct s_config		cfg_t;
 # define _TD_GRD	typedef struct s_grid	grid_t;
 # define _TD_MLX	typedef struct s_mlx	mlx_t;

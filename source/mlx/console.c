@@ -6,10 +6,14 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 11:12:25 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/07 11:13:09 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/21 10:58:35 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 
 void
+	start_console(void)
+{
+	return ;
+}

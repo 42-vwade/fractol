@@ -6,7 +6,7 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:30:09 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/21 04:32:34 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/24 14:16:48 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,22 @@ struct	s_vec2d
 
 struct	s_vec3d
 {
-	double	x;
-	double	y;
-	double	z;
+	long double	x;
+	long double	y;
+	long double	z;
 };
 
 struct	s_zoom
 {
-	double	x_min;
-	double	x_max;
-	double	y_min;
-	double	y_max;
+	long double	x_min;
+	long double	x_max;
+	long double	y_min;
+	long double	y_max;
 };
 
 struct s_map
 {
-	unsigned int	iter[DIM_Y * DIM_X];
+	unsigned long	iter[DIM_Y * DIM_X];
 };
 
 
@@ -75,6 +75,7 @@ struct	s_image
 struct	s_config
 {
 	long	p_threads;
+	int		lame;
 };
 
 struct	s_fractol
@@ -87,11 +88,11 @@ struct	s_fractol
 	void			*m_start;
 	t_img			bmp;
 	v3d_t			dim;
-	t_map			map;
+	unsigned long	map[DIM_Y * DIM_X];
 	const size_t	bailout;
-	const t_zoom	zoom_default;
+	const t_zoom	z_ref;
 	t_zoom			zoom;
-	double			scale;
+	long double		scale;
 	v3d_t			center;
 };
 

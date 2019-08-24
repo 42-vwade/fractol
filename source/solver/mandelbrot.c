@@ -6,11 +6,16 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:29:42 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/21 04:31:20 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/24 15:51:43 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solver.h"
+#define ZS(n,s)	((n)/MAX(1,(s)))
+#define ZOOM(xi,xa,yi,ya,z,c) (t_zoom){ZS(xi,z),ZS(xa,z),ZS(yi,z),ZS(ya,z)}
+#define _MRNGC(min,max)	(RANGE((min),(max)) - (min))
+#define OFFSET(n,min,max,c) ((n) * _MRNGC(min,max))
+#define MANDELBROT_ALGORITHM(z, c)	(M_Z2(z) + M_C2(c))
 
 static void
 	draw_pixel(env_t *o, size_t index, pixel_u col)
@@ -19,21 +24,23 @@ static void
 }
 
 static void
-	solve(env_t *o, size_t *bounces, v3d_t c)
+	solve(env_t *o, size_t *bounces, v3d_t p)
 {
-	double	z;
+	v3d_t	c;
+	v3d_t	d;
 
-	z = 0;
-	c.x = (c.x - o->dim.x * 0.5) / o->dim.x;
-	c.y = (c.y - o->dim.y * 0.5) / o->dim.y;
-	c = (v3d_t){c.x * c.x, c.y * c.y, c.z};
-	while (bounces[0] < o->bailout && (z = (z * z) + (c.x + c.y)) < 4)
+	bounces[0] = 0;
+	d.x = OFFSET(p.x / o->dim.x, o->zoom.x_min, o->zoom.x_max, o->center.x);
+	d.y = OFFSET(p.y / o->dim.y, o->zoom.y_min, o->zoom.y_max, o->center.y);
+	d.z = OFFSET(p.z / o->dim.y, o->zoom.y_min, o->zoom.y_max, o->center.z);
+	c = (v3d_t){d.x, d.y, 0};
+	c = (v3d_t){c.x * c.x, c.y * c.y, (c.x + c.y) * (c.x + c.y)};
+	while (c.x + c.y < 4 && bounces[0]++ < o->bailout)
 	{
-		c.x += c.x;
-		c.y += c.y;
-		bounces[0]++;
+		c = (v3d_t){c.x - c.y + d.x, c.z - c.x - c.y + d.y, 0};
+		c = (v3d_t){c.x * c.x, c.y * c.y, (c.x + c.y) * (c.x + c.y)};
 	}
-	draw_pixel(o, c.x + (c.y * o->dim.x), color_gradient(*bounces, o->bailout));
+	draw_pixel(o, p.x + (p.y * o->dim.x), color_gradient(*bounces, o->bailout));
 }
 
 /*
@@ -49,15 +56,15 @@ void
 {
 	size_t	i;
 	size_t	limit;
-	size_t	bounces;
 
 	i = -1;
-	ft_bzero(o->m_start, sizeof(int) * DIM_Y * DIM_X);
-	limit = o->dim.x * o->dim.y;
-	while (++i < limit && !(bounces = 0))
-		solve(o, &o->map.iter[i],
+  	limit = o->dim.x * o->dim.y;
+	o->zoom = ZOOM(o->z_ref.x_min,
+		o->z_ref.x_max, o->z_ref.y_min, o->z_ref.y_max, o->scale, o->center);
+	while (++i < limit)
+		solve(o, &o->map[i],
 			(v3d_t){(int)(i % (int)o->dim.x), (int)(i / (int)o->dim.x), 0});
 	mlx_put_image_to_window(o->m_init, o->m_window, o->m_image, 0, 0);
 	return ;
-	ft_memcpy(o->map.iter, o->m_start, sizeof(int) * DIM_Y * DIM_X);
+	ft_memcpy(o->map, o->m_start, sizeof(*o->map) * DIM_Y * DIM_X);
 }
