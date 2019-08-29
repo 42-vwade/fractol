@@ -26,5 +26,5 @@ void
 	o.scale = 1;
 	o.dim = (v3d_t){IS_O(DIM_X), IS_O(DIM_Y), IS_O(DIM_Y) / IS_O(DIM_X)};
 	mandelbrot(&o);
-	mlx_loop(o.m_init);
+//	mlx_loop(o.m_init);
 }
