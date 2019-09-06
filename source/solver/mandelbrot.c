@@ -6,13 +6,15 @@
 /*   By: viwade <viwade@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 15:29:42 by viwade            #+#    #+#             */
-/*   Updated: 2019/08/24 15:51:43 by viwade           ###   ########.fr       */
+/*   Updated: 2019/08/24 16:32:53 by viwade           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solver.h"
-#define ZS(n,s)	((n)/MAX(1,(s)))
-#define ZOOM(xi,xa,yi,ya,z,c) (t_zoom){ZS(xi,z),ZS(xa,z),ZS(yi,z),ZS(ya,z)}
+#define Z1(n,s)		((n)/MAX(1,(s)))
+#define ZX(n,s,o)	(Z1(n,s))
+#define ZY(n,s,o)	(Z1(n,s))
+#define ZOOM(a,b,c,d,z,o) (t_zoom){ZX(a,z,o),ZX(b,z,o),ZY(c,z,o),ZY(d,z,o)}
 #define _MRNGC(min,max)	(RANGE((min),(max)) - (min))
 #define OFFSET(n,min,max,c) ((n) * _MRNGC(min,max))
 #define MANDELBROT_ALGORITHM(z, c)	(M_Z2(z) + M_C2(c))
